@@ -1,0 +1,9 @@
+name: WorldGuardian
+main: TrFolwe\WGuardian
+version: 1.0
+api: 5.0.0
+author: TrFolwe
+
+permissions:
+  wguard.permission:
+    default: true
