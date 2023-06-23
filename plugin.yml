@@ -6,4 +6,4 @@ author: TrFolwe
 
 permissions:
   wguard.permission:
-    default: true
+    default: op
