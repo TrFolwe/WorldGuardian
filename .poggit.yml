@@ -1,0 +1,10 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/TrFolwe/WorldGuardian
+build-by-default: true
+branches:
+- main
+projects:
+  WorldGuardian:
+    libs:
+      - src: dktapps-pm-pl/pmforms/pmforms
+        version: ^2.1.0
+...
