@@ -47,6 +47,14 @@ class WGuardListener implements Listener {
             return;
         }
 
+        if(!Server::getInstance()->isOp($player->getName()) && $areaName = WorldManager::inAreaPos($blockPosition->getFloorX(), $blockPosition->getFloorY(), $blockPosition->getFloorZ(), $worldName)) {
+            $areaPermissions = WorldManager::getAreaPermission($areaName);
+            if(!$areaPermissions["block_break"]) {
+                $player->sendMessage("§c> This area is locked");
+                $event->cancel();
+            }
+        }
+
         if(isset($this->yamlDatabase->get("lockedWorlds")[$worldName])) {
             if(!Server::getInstance()->isOp($player->getName()) && !$this->yamlDatabase->get("lockedWorlds")[$worldName]["block_break"]) {
                 $lockedWorldSettings = $this->config->get("locked-world-settings");
@@ -54,14 +62,6 @@ class WGuardListener implements Listener {
                 $event->cancel();
             }
             return;
-        }
-
-        if(!Server::getInstance()->isOp($player->getName()) && $areaName = WorldManager::inAreaPos($blockPosition->getFloorX(), $blockPosition->getFloorY(), $blockPosition->getFloorZ(), $worldName)) {
-            $areaPermissions = WorldManager::getAreaPermission($areaName);
-            if(!$areaPermissions["block_break"]) {
-                $player->sendMessage("§c> This area is locked");
-                $event->cancel();
-            }
         }
     }
 
@@ -74,6 +74,14 @@ class WGuardListener implements Listener {
         $blockPosition = $event->getBlockAgainst()->getPosition();
         $worldName = $player->getWorld()->getFolderName();
 
+        if(!Server::getInstance()->isOp($player->getName()) && $areaName = WorldManager::inAreaPos($blockPosition->getFloorX(), $blockPosition->getFloorZ(), $blockPosition->getFloorZ(), $worldName)) {
+            $areaPermissions = WorldManager::getAreaPermission($areaName);
+            if(!$areaPermissions["block_place"]) {
+                $player->sendMessage("§c> This area is locked");
+                $event->cancel();
+            }
+        }
+
         if(isset($this->yamlDatabase->get("lockedWorlds")[$worldName])) {
             if(!Server::getInstance()->isOp($player->getName()) && !$this->yamlDatabase->get("lockedWorlds")[$worldName]["block_place"]) {
                 $lockedWorldSettings = $this->config->get("locked-world-settings");
@@ -81,14 +89,6 @@ class WGuardListener implements Listener {
                 $event->cancel();
             }
             return;
-        }
-
-        if(!Server::getInstance()->isOp($player->getName()) && $areaName = WorldManager::inAreaPos($blockPosition->getFloorX(), $blockPosition->getFloorZ(), $blockPosition->getFloorZ(), $worldName)) {
-            $areaPermissions = WorldManager::getAreaPermission($areaName);
-            if(!$areaPermissions["block_place"]) {
-                $player->sendMessage("§c> This area is locked");
-                $event->cancel();
-            }
         }
     }
 
@@ -102,6 +102,14 @@ class WGuardListener implements Listener {
         $blockPosition = $block->getPosition();
         $worldName = $player->getWorld()->getFolderName();
 
+        if(!Server::getInstance()->isOp($player->getName()) && $areaName = WorldManager::inAreaPos($blockPosition->getFloorX(), $blockPosition->getFloorY(), $blockPosition->getFloorZ(), $worldName)) {
+            $areaPermissions = WorldManager::getAreaPermission($areaName);
+            if(!$areaPermissions["chest_open"]) {
+                if($block instanceof Chest) $player->sendMessage("§c> This area is locked");
+                $event->cancel();
+            }
+        }
+
         if(isset($this->yamlDatabase->get("lockedWorlds")[$worldName])) {
             if(!Server::getInstance()->isOp($player->getName()) && !$this->yamlDatabase->get("lockedWorlds")[$worldName]["chest_open"]) {
                 $lockedWorldSettings = $this->config->get("locked-world-settings");
@@ -109,14 +117,6 @@ class WGuardListener implements Listener {
                 $event->cancel();
             }
             return;
-        }
-
-        if(!Server::getInstance()->isOp($player->getName()) && $areaName = WorldManager::inAreaPos($blockPosition->getFloorX(), $blockPosition->getFloorY(), $blockPosition->getFloorZ(), $worldName)) {
-            $areaPermissions = WorldManager::getAreaPermission($areaName);
-            if(!$areaPermissions["chest_open"]) {
-                if($block instanceof Chest) $player->sendMessage("§c> This area is locked");
-                $event->cancel();
-            }
         }
     }
 
@@ -129,6 +129,14 @@ class WGuardListener implements Listener {
         $playerPosition = $player->getPosition();
         $worldName = $player->getWorld()->getFolderName();
 
+        if(!Server::getInstance()->isOp($player->getName()) && $areaName = WorldManager::inAreaPos($playerPosition->getFloorX(), $playerPosition->getFloorY(), $playerPosition->getFloorZ(), $worldName)) {
+            $areaPermissions = WorldManager::getAreaPermission($areaName);
+            if(!$areaPermissions["drop_item"]) {
+                $player->sendMessage("§c> This area is locked");
+                $event->cancel();
+            }
+        }
+
         if(isset($this->yamlDatabase->get("lockedWorlds")[$worldName])) {
             if(!Server::getInstance()->isOp($player->getName()) && !$this->yamlDatabase->get("lockedWorlds")[$worldName]["drop_item"]) {
                 $lockedWorldSettings = $this->config->get("locked-world-settings");
@@ -136,14 +144,6 @@ class WGuardListener implements Listener {
                 $event->cancel();
             }
             return;
-        }
-
-        if(!Server::getInstance()->isOp($player->getName()) && $areaName = WorldManager::inAreaPos($playerPosition->getFloorX(), $playerPosition->getFloorY(), $playerPosition->getFloorZ(), $worldName)) {
-            $areaPermissions = WorldManager::getAreaPermission($areaName);
-            if(!$areaPermissions["drop_item"]) {
-                $player->sendMessage("§c> This area is locked");
-                $event->cancel();
-            }
         }
     }
 
@@ -157,6 +157,14 @@ class WGuardListener implements Listener {
         $playerPosition = $player->getPosition();
         $worldName = $player->getWorld()->getFolderName();
 
+        if(!Server::getInstance()->isOp($player->getName()) && $areaName = WorldManager::inAreaPos($playerPosition->getFloorX(), $playerPosition->getFloorY(), $playerPosition->getFloorZ(), $worldName)) {
+            $areaPermissions = WorldManager::getAreaPermission($areaName);
+            if(!$areaPermissions["pick_item"]) {
+                $player->sendTip("§c> This area is locked");
+                $event->cancel();
+            }
+        }
+
         if(isset($this->yamlDatabase->get("lockedWorlds")[$worldName])) {
             if(!Server::getInstance()->isOp($player->getName()) && !$this->yamlDatabase->get("lockedWorlds")[$worldName]["pick_item"]) {
                 $lockedWorldSettings = $this->config->get("locked-world-settings");
@@ -164,14 +172,6 @@ class WGuardListener implements Listener {
                 $event->cancel();
             }
             return;
-        }
-
-        if(!Server::getInstance()->isOp($player->getName()) && $areaName = WorldManager::inAreaPos($playerPosition->getFloorX(), $playerPosition->getFloorY(), $playerPosition->getFloorZ(), $worldName)) {
-            $areaPermissions = WorldManager::getAreaPermission($areaName);
-            if(!$areaPermissions["pick_item"]) {
-                $player->sendTip("§c> This area is locked");
-                $event->cancel();
-            }
         }
     }
 
@@ -187,6 +187,14 @@ class WGuardListener implements Listener {
         $damagerPosition = $damager->getPosition();
         $worldName = $player->getWorld()->getFolderName();
 
+        if(!Server::getInstance()->isOp($damager->getName()) && (($areaName = WorldManager::inAreaPos($playerPosition->getFloorX(), $playerPosition->getFloorY(), $playerPosition->getFloorZ(), $worldName)) || WorldManager::inAreaPos($damagerPosition->getFloorX(), $damagerPosition->getFloorY(), $damagerPosition->getFloorZ(), $worldName))) {
+            $areaPermissions = WorldManager::getAreaPermission($areaName);
+            if(!$areaPermissions["player_pvp"]) {
+                $damager->sendTip("§c> This area is locked");
+                $event->cancel();
+            }
+        }
+
         if(isset($this->yamlDatabase->get("lockedWorlds")[$worldName])) {
             if(!Server::getInstance()->isOp($damager->getName()) && !$this->yamlDatabase->get("lockedWorlds")[$worldName]["player_pvp"]) {
                 $lockedWorldSettings = $this->config->get("locked-world-settings");
@@ -194,14 +202,6 @@ class WGuardListener implements Listener {
                 $event->cancel();
             }
             return;
-        }
-
-        if(!Server::getInstance()->isOp($damager->getName()) && (($areaName = WorldManager::inAreaPos($playerPosition->getFloorX(), $playerPosition->getFloorY(), $playerPosition->getFloorZ(), $worldName)) || WorldManager::inAreaPos($damagerPosition->getFloorX(), $damagerPosition->getFloorY(), $damagerPosition->getFloorZ(), $worldName))) {
-            $areaPermissions = WorldManager::getAreaPermission($areaName);
-            if(!$areaPermissions["player_pvp"]) {
-                $damager->sendTip("§c> This area is locked");
-                $event->cancel();
-            }
         }
     }
 }
