@@ -1,9 +1,9 @@
 <?php
 
-namespace TrFolwe\manager;
+namespace TrFolwe\WorldGuardian\manager;
 
 use pocketmine\Server;
-use TrFolwe\WGuardian;
+use TrFolwe\WorldGuardian\WGuardian;
 
 final class WorldManager {
 

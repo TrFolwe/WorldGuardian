@@ -1,6 +1,6 @@
 <?php
 
-namespace TrFolwe\forms;
+namespace TrFolwe\WorldGuardian\forms;
 
 use dktapps\pmforms\MenuForm;
 use dktapps\pmforms\MenuOption;

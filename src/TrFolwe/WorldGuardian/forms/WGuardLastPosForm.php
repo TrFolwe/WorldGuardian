@@ -1,6 +1,6 @@
 <?php
 
-namespace TrFolwe\forms;
+namespace TrFolwe\WorldGuardian\forms;
 
 use dktapps\pmforms\CustomForm;
 use dktapps\pmforms\CustomFormResponse;
@@ -8,8 +8,8 @@ use dktapps\pmforms\element\Input;
 use dktapps\pmforms\element\Label;
 use dktapps\pmforms\element\Toggle;
 use pocketmine\player\Player;
-use TrFolwe\manager\WorldManager;
-use TrFolwe\WGuardian;
+use TrFolwe\WorldGuardian\manager\WorldManager;
+use TrFolwe\WorldGuardian\WGuardian;
 
 class WGuardLastPosForm extends CustomForm {
     public function __construct() {

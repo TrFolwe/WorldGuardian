@@ -1,9 +1,8 @@
 <?php
 
-namespace TrFolwe\listener;
+namespace TrFolwe\WorldGuardian\listener;
 
 use pocketmine\block\Chest;
-use pocketmine\block\TrappedChest;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
@@ -14,9 +13,9 @@ use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\player\Player;
 use pocketmine\Server;
 use pocketmine\utils\Config;
-use TrFolwe\forms\WGuardLastPosForm;
-use TrFolwe\manager\WorldManager;
-use TrFolwe\WGuardian;
+use TrFolwe\WorldGuardian\forms\WGuardLastPosForm;
+use TrFolwe\WorldGuardian\manager\WorldManager;
+use TrFolwe\WorldGuardian\WGuardian;
 
 class WGuardListener implements Listener {
 

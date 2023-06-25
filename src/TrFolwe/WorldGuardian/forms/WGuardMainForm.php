@@ -1,13 +1,13 @@
 <?php
 
-namespace TrFolwe\forms;
+namespace TrFolwe\WorldGuardian\forms;
 
 use dktapps\pmforms\element\Toggle;
 use dktapps\pmforms\MenuForm;
 use dktapps\pmforms\MenuOption;
 use pocketmine\player\Player;
-use TrFolwe\manager\WorldManager;
-use TrFolwe\WGuardian;
+use TrFolwe\WorldGuardian\manager\WorldManager;
+use TrFolwe\WorldGuardian\WGuardian;
 
 class WGuardMainForm extends MenuForm
 {

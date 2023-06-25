@@ -1,11 +1,12 @@
 <?php
 
-namespace TrFolwe;
+namespace TrFolwe\WorldGuardian;
 
+use pocketmine\item\StringToItemParser;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
-use TrFolwe\command\WGuardCommand;
-use TrFolwe\listener\WGuardListener;
+use TrFolwe\WorldGuardian\command\WGuardCommand;
+use TrFolwe\WorldGuardian\listener\WGuardListener;
 
 class WGuardian extends PluginBase
 {
@@ -30,7 +31,7 @@ class WGuardian extends PluginBase
 
    protected function onEnable(): void
    {
-       $this->getServer()->getCommandMap()->register("worldguardian", new WGuardCommand());
+       $this->getServer()->getCommandMap()->register("worldguardian", new WGuardCommand($this));
        $this->getServer()->getPluginManager()->registerEvents(new WGuardListener(), $this);
    }
 

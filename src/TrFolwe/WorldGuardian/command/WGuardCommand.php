@@ -1,16 +1,21 @@
 <?php
 
-namespace TrFolwe\command;
+namespace TrFolwe\WorldGuardian\command;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
-use TrFolwe\forms\WGuardMainForm;
+use pocketmine\plugin\Plugin;
+use pocketmine\plugin\PluginOwned;
+use TrFolwe\WorldGuardian\forms\WGuardMainForm;
+use TrFolwe\WorldGuardian\WGuardian;
 
-class WGuardCommand extends Command
+class WGuardCommand extends Command implements PluginOwned
 {
 
-    public function __construct()
+    /*** @var WGuardian $instance */
+    private WGuardian $instance;
+    public function __construct(WGuardian $instance)
     {
         parent::__construct(
             "worldguardian",
@@ -19,6 +24,13 @@ class WGuardCommand extends Command
             ["wg"]
         );
         $this->setPermission("worldguardian.perm");
+        $this->instance = $instance;
+    }
+
+    /*** @return Plugin */
+    public function getOwningPlugin(): Plugin
+    {
+        return $this->instance;
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
