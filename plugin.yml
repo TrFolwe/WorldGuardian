@@ -1,0 +1,10 @@
+name: WorldGuardian
+main: TrFolwe\WGuardian
+version: 1.0
+api: 5.0.0
+author: TrFolwe
+
+permissions:
+  worldguardian.perm:
+    default: op
+    description: "WorldGuardian command perm"
