@@ -181,7 +181,7 @@ class WGuardListener implements Listener {
     public function onEntityDamage(EntityDamageByEntityEvent $event) :void {
         $damager = $event->getDamager();
         $player = $event->getEntity();
-        if(!$player instanceof Player && !$damager instanceof Player) return;
+        if(!$player instanceof Player || !$damager instanceof Player) return;
         $playerPosition = $player->getPosition();
         $damagerPosition = $damager->getPosition();
         $worldName = $player->getWorld()->getFolderName();
