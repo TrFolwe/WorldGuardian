@@ -14,7 +14,8 @@ final class WorldManager {
         "chest_open" => false,
         "drop_item" => false,
         "pick_item" => false,
-        "player_pvp" => false
+        "player_pvp" => false,
+        "fall_damage" => false
     ];
 
     /*** @return string[] */

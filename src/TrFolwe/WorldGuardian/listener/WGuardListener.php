@@ -6,6 +6,7 @@ use pocketmine\block\Chest;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityItemPickupEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerDropItemEvent;
@@ -28,6 +29,7 @@ class WGuardListener implements Listener {
     }
 
     public function onBlockBreak(BlockBreakEvent $event) :void {
+        if($event->isCancelled()) return;
         $player = $event->getPlayer();
         $blockPosition = $event->getBlock()->getPosition();
         $worldName = $player->getWorld()->getFolderName();
@@ -178,7 +180,7 @@ class WGuardListener implements Listener {
      * @param EntityDamageByEntityEvent $event
      * @return void
      */
-    public function onEntityDamage(EntityDamageByEntityEvent $event) :void {
+    public function onEntityByDamage(EntityDamageByEntityEvent $event) :void {
         $damager = $event->getDamager();
         $player = $event->getEntity();
         if(!$player instanceof Player || !$damager instanceof Player) return;
@@ -200,7 +202,23 @@ class WGuardListener implements Listener {
                 if($lockedWorldSettings["active"]) $damager->sendTip($lockedWorldSettings["message"]);
                 $event->cancel();
             }
-            return;
         }
+    }
+
+    /**
+     * @param EntityDamageEvent $event
+     * @return void
+     */
+    public function onEntityOnDamage(EntityDamageEvent $event) :void {
+        $player = $event->getEntity();
+        if(!$player instanceof Player) return;
+        $playerPosition = $player->getPosition();
+        $worldName = $player->getWorld()->getFolderName();
+        if(($areaName = WorldManager::inAreaPos($playerPosition->getFloorX(), $playerPosition->getFloorY(), $playerPosition->getFloorZ(), $worldName)) && $event->getCause() === EntityDamageEvent::CAUSE_FALL) {
+            $areaPermissions = WorldManager::getAreaPermission($areaName);
+            if(!$areaPermissions["fall_damage"]) $event->cancel();
+        }
+
+        if(isset($this->yamlDatabase->get("lockedWorlds")[$worldName]) && !$this->yamlDatabase->get("lockedWorlds")[$worldName]["fall_damage"]) $event->cancel();
     }
 }
