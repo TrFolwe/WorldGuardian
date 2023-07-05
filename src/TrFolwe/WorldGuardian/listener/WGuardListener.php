@@ -188,7 +188,7 @@ class WGuardListener implements Listener {
         $damagerPosition = $damager->getPosition();
         $worldName = $player->getWorld()->getFolderName();
 
-        if(!Server::getInstance()->isOp($damager->getName()) && (($areaName = WorldManager::inAreaPos($playerPosition->getFloorX(), $playerPosition->getFloorY(), $playerPosition->getFloorZ(), $worldName)) || WorldManager::inAreaPos($damagerPosition->getFloorX(), $damagerPosition->getFloorY(), $damagerPosition->getFloorZ(), $worldName))) {
+        if(!Server::getInstance()->isOp($damager->getName()) && (($areaName = WorldManager::inAreaPos($playerPosition->getFloorX(), $playerPosition->getFloorY(), $playerPosition->getFloorZ(), $worldName)) || ($areaName = WorldManager::inAreaPos($damagerPosition->getFloorX(), $damagerPosition->getFloorY(), $damagerPosition->getFloorZ(), $worldName)))) {
             $areaPermissions = WorldManager::getAreaPermission($areaName);
             if(!$areaPermissions["player_pvp"]) {
                 $damager->sendTip("§c> This area is locked");
